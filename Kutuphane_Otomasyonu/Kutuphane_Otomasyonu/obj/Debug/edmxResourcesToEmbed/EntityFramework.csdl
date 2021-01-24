@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KutuphaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Uyeler">
+    <Key>
+      <PropertyRef Name="uyeId" />
+    </Key>
+    <Property Name="uyeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="uyeTc" Type="Int32" />
+    <Property Name="uyeIsim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="uyeSoyisim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="uyeTel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="uyeKayitTarihi" Type="DateTime" Precision="3" />
+    <Property Name="uyeEmail" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+    <Property Name="uyeAdres" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Oduncler" Relationship="KutuphaneModel.FK_Oduncler_Uyeler" FromRole="Uyeler" ToRole="Oduncler" />
+  </EntityType>
+  <EntityType Name="Yoneticiler">
+    <Key>
+      <PropertyRef Name="yoneticiId" />
+    </Key>
+    <Property Name="yoneticiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="yoneticiKullaniciAdi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="yoneticiSifre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="yoneticiAdi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="yoneticiSoyadi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="yoneticiUnvan" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="KutuphaneEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Uyeler" EntityType="Self.Uyeler" />
+    <EntitySet Name="Yoneticiler" EntityType="Self.Yoneticiler" />
+    <EntitySet Name="Kitaplar" EntityType="KutuphaneModel.Kitaplar" />
+    <EntitySet Name="Oduncler" EntityType="KutuphaneModel.Oduncler" />
+    <AssociationSet Name="FK_Oduncler_Kitaplar" Association="KutuphaneModel.FK_Oduncler_Kitaplar">
+      <End Role="Kitaplar" EntitySet="Kitaplar" />
+      <End Role="Oduncler" EntitySet="Oduncler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oduncler_Uyeler" Association="KutuphaneModel.FK_Oduncler_Uyeler">
+      <End Role="Uyeler" EntitySet="Uyeler" />
+      <End Role="Oduncler" EntitySet="Oduncler" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Kitaplar">
+    <Key>
+      <PropertyRef Name="kitapId" />
+    </Key>
+    <Property Name="kitapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kitapAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kitapYazari" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kitapYayinEvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kitapStok" Type="Int32" />
+    <Property Name="kitapSayfa" Type="Int32" />
+    <Property Name="kitapTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="kitapBasimYili" Type="Int32" />
+    <Property Name="kitapDurum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="kitapBarkod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Oduncler" Relationship="KutuphaneModel.FK_Oduncler_Kitaplar" FromRole="Kitaplar" ToRole="Oduncler" />
+  </EntityType>
+  <EntityType Name="Oduncler">
+    <Key>
+      <PropertyRef Name="oduncId" />
+    </Key>
+    <Property Name="oduncId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kitapId" Type="Int32" />
+    <Property Name="uyeId" Type="Int32" />
+    <Property Name="oduncATarih" Type="DateTime" Precision="3" />
+    <Property Name="oduncVTarih" Type="DateTime" Precision="3" />
+    <Property Name="oduncDurum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="oduncAciklama" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Kitaplar" Relationship="KutuphaneModel.FK_Oduncler_Kitaplar" FromRole="Oduncler" ToRole="Kitaplar" />
+    <NavigationProperty Name="Uyeler" Relationship="KutuphaneModel.FK_Oduncler_Uyeler" FromRole="Oduncler" ToRole="Uyeler" />
+  </EntityType>
+  <Association Name="FK_Oduncler_Kitaplar">
+    <End Type="KutuphaneModel.Kitaplar" Role="Kitaplar" Multiplicity="0..1" />
+    <End Type="KutuphaneModel.Oduncler" Role="Oduncler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kitaplar">
+        <PropertyRef Name="kitapId" />
+      </Principal>
+      <Dependent Role="Oduncler">
+        <PropertyRef Name="kitapId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oduncler_Uyeler">
+    <End Type="KutuphaneModel.Uyeler" Role="Uyeler" Multiplicity="0..1" />
+    <End Type="KutuphaneModel.Oduncler" Role="Oduncler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uyeler">
+        <PropertyRef Name="uyeId" />
+      </Principal>
+      <Dependent Role="Oduncler">
+        <PropertyRef Name="uyeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8355261C-153A-406E-B7E0-8769C7B165F3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Kutuphane_Otomasyonu</RootNamespace>
+    <AssemblyName>Kutuphane_Otomasyonu</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EntityFramework.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFramework.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFramework.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formGecikenler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formGecikenler.Designer.cs">
+      <DependentUpon>formGecikenler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="formGuvenlik.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formGuvenlik.Designer.cs">
+      <DependentUpon>formGuvenlik.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormKitap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormKitap.Designer.cs">
+      <DependentUpon>FormKitap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormOdunc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOdunc.Designer.cs">
+      <DependentUpon>FormOdunc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUyeler.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUyeler.Designer.cs">
+      <DependentUpon>FormUyeler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kitaplar.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Mesajlar.cs" />
+    <Compile Include="Oduncler.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Uyeler.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Varlıklar\Kitaplar.cs" />
+    <Compile Include="Varlıklar\Uyeler.cs" />
+    <Compile Include="Yoneticiler.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formGecikenler.resx">
+      <DependentUpon>formGecikenler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formGuvenlik.resx">
+      <DependentUpon>formGuvenlik.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormKitap.resx">
+      <DependentUpon>FormKitap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOdunc.resx">
+      <DependentUpon>FormOdunc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUyeler.resx">
+      <DependentUpon>FormUyeler.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EntityDeploy Include="EntityFramework.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntityFramework.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EntityFramework.edmx.diagram">
+      <DependentUpon>EntityFramework.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EntityFramework.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityFramework.edmx</DependentUpon>
+      <LastGenOutput>EntityFramework.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EntityFramework.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityFramework.edmx</DependentUpon>
+      <LastGenOutput>EntityFramework.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

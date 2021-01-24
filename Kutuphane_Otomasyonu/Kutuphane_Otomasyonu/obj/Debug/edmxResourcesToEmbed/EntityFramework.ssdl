@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KutuphaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kitaplar">
+    <Key>
+      <PropertyRef Name="kitapId" />
+    </Key>
+    <Property Name="kitapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kitapAdi" Type="nvarchar" MaxLength="50" />
+    <Property Name="kitapYazari" Type="nvarchar" MaxLength="50" />
+    <Property Name="kitapYayinEvi" Type="nvarchar" MaxLength="50" />
+    <Property Name="kitapStok" Type="int" />
+    <Property Name="kitapSayfa" Type="int" />
+    <Property Name="kitapTuru" Type="nvarchar" MaxLength="50" />
+    <Property Name="kitapBasimYili" Type="int" />
+    <Property Name="kitapDurum" Type="nchar" MaxLength="10" />
+    <Property Name="kitapBarkod" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Oduncler">
+    <Key>
+      <PropertyRef Name="oduncId" />
+    </Key>
+    <Property Name="oduncId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kitapId" Type="int" />
+    <Property Name="uyeId" Type="int" />
+    <Property Name="oduncATarih" Type="datetime" />
+    <Property Name="oduncVTarih" Type="datetime" />
+    <Property Name="oduncDurum" Type="nchar" MaxLength="10" />
+    <Property Name="oduncAciklama" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Uyeler">
+    <Key>
+      <PropertyRef Name="uyeId" />
+    </Key>
+    <Property Name="uyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="uyeTc" Type="int" />
+    <Property Name="uyeIsim" Type="nvarchar" MaxLength="50" />
+    <Property Name="uyeSoyisim" Type="nvarchar" MaxLength="50" />
+    <Property Name="uyeTel" Type="nvarchar" MaxLength="15" />
+    <Property Name="uyeKayitTarihi" Type="datetime" />
+    <Property Name="uyeEmail" Type="nchar" MaxLength="25" />
+    <Property Name="uyeAdres" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Yoneticiler">
+    <Key>
+      <PropertyRef Name="yoneticiId" />
+    </Key>
+    <Property Name="yoneticiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="yoneticiKullaniciAdi" Type="nvarchar" MaxLength="30" />
+    <Property Name="yoneticiSifre" Type="nvarchar" MaxLength="30" />
+    <Property Name="yoneticiAdi" Type="nvarchar" MaxLength="30" />
+    <Property Name="yoneticiSoyadi" Type="nvarchar" MaxLength="30" />
+    <Property Name="yoneticiUnvan" Type="nvarchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK_Oduncler_Kitaplar">
+    <End Role="Kitaplar" Type="Self.Kitaplar" Multiplicity="0..1" />
+    <End Role="Oduncler" Type="Self.Oduncler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kitaplar">
+        <PropertyRef Name="kitapId" />
+      </Principal>
+      <Dependent Role="Oduncler">
+        <PropertyRef Name="kitapId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Oduncler_Uyeler">
+    <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="0..1" />
+    <End Role="Oduncler" Type="Self.Oduncler" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Uyeler">
+        <PropertyRef Name="uyeId" />
+      </Principal>
+      <Dependent Role="Oduncler">
+        <PropertyRef Name="uyeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KutuphaneModelStoreContainer">
+    <EntitySet Name="Kitaplar" EntityType="Self.Kitaplar" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Oduncler" EntityType="Self.Oduncler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Uyeler" EntityType="Self.Uyeler" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Yoneticiler" EntityType="Self.Yoneticiler" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Oduncler_Kitaplar" Association="Self.FK_Oduncler_Kitaplar">
+      <End Role="Kitaplar" EntitySet="Kitaplar" />
+      <End Role="Oduncler" EntitySet="Oduncler" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Oduncler_Uyeler" Association="Self.FK_Oduncler_Uyeler">
+      <End Role="Uyeler" EntitySet="Uyeler" />
+      <End Role="Oduncler" EntitySet="Oduncler" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

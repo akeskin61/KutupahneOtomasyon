@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="KutuphaneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Kitaplar">
+          <Key>
+            <PropertyRef Name="kitapId" />
+          </Key>
+          <Property Name="kitapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kitapAdi" Type="nvarchar" MaxLength="50" />
+          <Property Name="kitapYazari" Type="nvarchar" MaxLength="50" />
+          <Property Name="kitapYayinEvi" Type="nvarchar" MaxLength="50" />
+          <Property Name="kitapStok" Type="int" />
+          <Property Name="kitapSayfa" Type="int" />
+          <Property Name="kitapTuru" Type="nvarchar" MaxLength="50" />
+          <Property Name="kitapBasimYili" Type="int" />
+          <Property Name="kitapDurum" Type="nchar" MaxLength="10" />
+          <Property Name="kitapBarkod" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Oduncler">
+          <Key>
+            <PropertyRef Name="oduncId" />
+          </Key>
+          <Property Name="oduncId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kitapId" Type="int" />
+          <Property Name="uyeId" Type="int" />
+          <Property Name="oduncATarih" Type="datetime" />
+          <Property Name="oduncVTarih" Type="datetime" />
+          <Property Name="oduncDurum" Type="nchar" MaxLength="10" />
+          <Property Name="oduncAciklama" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Uyeler">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uyeTc" Type="int" />
+          <Property Name="uyeIsim" Type="nvarchar" MaxLength="50" />
+          <Property Name="uyeSoyisim" Type="nvarchar" MaxLength="50" />
+          <Property Name="uyeTel" Type="nvarchar" MaxLength="15" />
+          <Property Name="uyeKayitTarihi" Type="datetime" />
+          <Property Name="uyeEmail" Type="nchar" MaxLength="25" />
+          <Property Name="uyeAdres" Type="nvarchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Yoneticiler">
+          <Key>
+            <PropertyRef Name="yoneticiId" />
+          </Key>
+          <Property Name="yoneticiId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yoneticiKullaniciAdi" Type="nvarchar" MaxLength="30" />
+          <Property Name="yoneticiSifre" Type="nvarchar" MaxLength="30" />
+          <Property Name="yoneticiAdi" Type="nvarchar" MaxLength="30" />
+          <Property Name="yoneticiSoyadi" Type="nvarchar" MaxLength="30" />
+          <Property Name="yoneticiUnvan" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <Association Name="FK_Oduncler_Kitaplar">
+          <End Role="Kitaplar" Type="Self.Kitaplar" Multiplicity="0..1" />
+          <End Role="Oduncler" Type="Self.Oduncler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitaplar">
+              <PropertyRef Name="kitapId" />
+            </Principal>
+            <Dependent Role="Oduncler">
+              <PropertyRef Name="kitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oduncler_Uyeler">
+          <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="0..1" />
+          <End Role="Oduncler" Type="Self.Oduncler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uyeler">
+              <PropertyRef Name="uyeId" />
+            </Principal>
+            <Dependent Role="Oduncler">
+              <PropertyRef Name="uyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="KutuphaneModelStoreContainer">
+          <EntitySet Name="Kitaplar" EntityType="Self.Kitaplar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Oduncler" EntityType="Self.Oduncler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uyeler" EntityType="Self.Uyeler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yoneticiler" EntityType="Self.Yoneticiler" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Oduncler_Kitaplar" Association="Self.FK_Oduncler_Kitaplar">
+            <End Role="Kitaplar" EntitySet="Kitaplar" />
+            <End Role="Oduncler" EntitySet="Oduncler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oduncler_Uyeler" Association="Self.FK_Oduncler_Uyeler">
+            <End Role="Uyeler" EntitySet="Uyeler" />
+            <End Role="Oduncler" EntitySet="Oduncler" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="KutuphaneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Uyeler">
+          <Key>
+            <PropertyRef Name="uyeId" />
+          </Key>
+          <Property Name="uyeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uyeTc" Type="Int32" />
+          <Property Name="uyeIsim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uyeSoyisim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="uyeTel" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="uyeKayitTarihi" Type="DateTime" Precision="3" />
+          <Property Name="uyeEmail" Type="String" MaxLength="25" FixedLength="true" Unicode="true" />
+          <Property Name="uyeAdres" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Oduncler" Relationship="KutuphaneModel.FK_Oduncler_Uyeler" FromRole="Uyeler" ToRole="Oduncler" />
+        </EntityType>
+        <EntityType Name="Yoneticiler">
+          <Key>
+            <PropertyRef Name="yoneticiId" />
+          </Key>
+          <Property Name="yoneticiId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yoneticiKullaniciAdi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="yoneticiSifre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="yoneticiAdi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="yoneticiSoyadi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="yoneticiUnvan" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="KutuphaneEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Uyeler" EntityType="Self.Uyeler" />
+          <EntitySet Name="Yoneticiler" EntityType="Self.Yoneticiler" />
+          <EntitySet Name="Kitaplar" EntityType="KutuphaneModel.Kitaplar" />
+          <EntitySet Name="Oduncler" EntityType="KutuphaneModel.Oduncler" />
+          <AssociationSet Name="FK_Oduncler_Kitaplar" Association="KutuphaneModel.FK_Oduncler_Kitaplar">
+            <End Role="Kitaplar" EntitySet="Kitaplar" />
+            <End Role="Oduncler" EntitySet="Oduncler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Oduncler_Uyeler" Association="KutuphaneModel.FK_Oduncler_Uyeler">
+            <End Role="Uyeler" EntitySet="Uyeler" />
+            <End Role="Oduncler" EntitySet="Oduncler" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Kitaplar">
+          <Key>
+            <PropertyRef Name="kitapId" />
+          </Key>
+          <Property Name="kitapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kitapAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kitapYazari" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kitapYayinEvi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kitapStok" Type="Int32" />
+          <Property Name="kitapSayfa" Type="Int32" />
+          <Property Name="kitapTuru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kitapBasimYili" Type="Int32" />
+          <Property Name="kitapDurum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="kitapBarkod" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Oduncler" Relationship="KutuphaneModel.FK_Oduncler_Kitaplar" FromRole="Kitaplar" ToRole="Oduncler" />
+        </EntityType>
+        <EntityType Name="Oduncler">
+          <Key>
+            <PropertyRef Name="oduncId" />
+          </Key>
+          <Property Name="oduncId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kitapId" Type="Int32" />
+          <Property Name="uyeId" Type="Int32" />
+          <Property Name="oduncATarih" Type="DateTime" Precision="3" />
+          <Property Name="oduncVTarih" Type="DateTime" Precision="3" />
+          <Property Name="oduncDurum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="oduncAciklama" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kitaplar" Relationship="KutuphaneModel.FK_Oduncler_Kitaplar" FromRole="Oduncler" ToRole="Kitaplar" />
+          <NavigationProperty Name="Uyeler" Relationship="KutuphaneModel.FK_Oduncler_Uyeler" FromRole="Oduncler" ToRole="Uyeler" />
+        </EntityType>
+        <Association Name="FK_Oduncler_Kitaplar">
+          <End Type="KutuphaneModel.Kitaplar" Role="Kitaplar" Multiplicity="0..1" />
+          <End Type="KutuphaneModel.Oduncler" Role="Oduncler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitaplar">
+              <PropertyRef Name="kitapId" />
+            </Principal>
+            <Dependent Role="Oduncler">
+              <PropertyRef Name="kitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Oduncler_Uyeler">
+          <End Type="KutuphaneModel.Uyeler" Role="Uyeler" Multiplicity="0..1" />
+          <End Type="KutuphaneModel.Oduncler" Role="Oduncler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uyeler">
+              <PropertyRef Name="uyeId" />
+            </Principal>
+            <Dependent Role="Oduncler">
+              <PropertyRef Name="uyeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="KutuphaneModelStoreContainer" CdmEntityContainer="KutuphaneEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="KutuphaneModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uyeler">
+            <EntityTypeMapping TypeName="KutuphaneModel.Uyeler">
+              <MappingFragment StoreEntitySet="Uyeler">
+                <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+                <ScalarProperty Name="uyeTc" ColumnName="uyeTc" />
+                <ScalarProperty Name="uyeIsim" ColumnName="uyeIsim" />
+                <ScalarProperty Name="uyeSoyisim" ColumnName="uyeSoyisim" />
+                <ScalarProperty Name="uyeTel" ColumnName="uyeTel" />
+                <ScalarProperty Name="uyeKayitTarihi" ColumnName="uyeKayitTarihi" />
+                <ScalarProperty Name="uyeEmail" ColumnName="uyeEmail" />
+                <ScalarProperty Name="uyeAdres" ColumnName="uyeAdres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yoneticiler">
+            <EntityTypeMapping TypeName="KutuphaneModel.Yoneticiler">
+              <MappingFragment StoreEntitySet="Yoneticiler">
+                <ScalarProperty Name="yoneticiId" ColumnName="yoneticiId" />
+                <ScalarProperty Name="yoneticiKullaniciAdi" ColumnName="yoneticiKullaniciAdi" />
+                <ScalarProperty Name="yoneticiSifre" ColumnName="yoneticiSifre" />
+                <ScalarProperty Name="yoneticiAdi" ColumnName="yoneticiAdi" />
+                <ScalarProperty Name="yoneticiSoyadi" ColumnName="yoneticiSoyadi" />
+                <ScalarProperty Name="yoneticiUnvan" ColumnName="yoneticiUnvan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kitaplar">
+            <EntityTypeMapping TypeName="KutuphaneModel.Kitaplar">
+              <MappingFragment StoreEntitySet="Kitaplar">
+                <ScalarProperty Name="kitapBarkod" ColumnName="kitapBarkod" />
+                <ScalarProperty Name="kitapDurum" ColumnName="kitapDurum" />
+                <ScalarProperty Name="kitapBasimYili" ColumnName="kitapBasimYili" />
+                <ScalarProperty Name="kitapTuru" ColumnName="kitapTuru" />
+                <ScalarProperty Name="kitapSayfa" ColumnName="kitapSayfa" />
+                <ScalarProperty Name="kitapStok" ColumnName="kitapStok" />
+                <ScalarProperty Name="kitapYayinEvi" ColumnName="kitapYayinEvi" />
+                <ScalarProperty Name="kitapYazari" ColumnName="kitapYazari" />
+                <ScalarProperty Name="kitapAdi" ColumnName="kitapAdi" />
+                <ScalarProperty Name="kitapId" ColumnName="kitapId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Oduncler">
+            <EntityTypeMapping TypeName="KutuphaneModel.Oduncler">
+              <MappingFragment StoreEntitySet="Oduncler">
+                <ScalarProperty Name="oduncAciklama" ColumnName="oduncAciklama" />
+                <ScalarProperty Name="oduncDurum" ColumnName="oduncDurum" />
+                <ScalarProperty Name="oduncVTarih" ColumnName="oduncVTarih" />
+                <ScalarProperty Name="oduncATarih" ColumnName="oduncATarih" />
+                <ScalarProperty Name="uyeId" ColumnName="uyeId" />
+                <ScalarProperty Name="kitapId" ColumnName="kitapId" />
+                <ScalarProperty Name="oduncId" ColumnName="oduncId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
