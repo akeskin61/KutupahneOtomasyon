@@ -15,3 +15,15 @@ Bu işlem tamamlandıktan sonra ilgili kitaptan kütüphanede başka stok yoksa 
 
 Yönetici ise sisteme öğrenci girişi  ve kitap girişi yapmakla görevlidir aynı zamanda zamanında teslim edilmeyen kitapları ve bu kitabı alan öğrencileri listeler ve ilgili işlemleri yapar.
  
+ 
+ ## Proje Kurulumu ##
+"akeskin61" isimli github hesabının içinden KutupahneOtomasyon adlı respository'deki, "Veritabanı"  ve "Setup ve Exe" klasörlerinin
+içeriği bilgisayara download edilmelidir, 
+## Veritabanı Kurulumu ##
+İnen veritabanı dosyalarından kutuphane.mdf  ve kutuphane.log dosyaları, Sql serverdan ilgili dizine import edilmelidir. 
+Bunu yapmak için databases klasörüne sağ tıklanır daha sonra Attach Databases seçeneğine tıklanır gerekli mdf klasörü seçilir ve
+import işlemi tamamlanmış olur.
+
+## Proje Setup ##
+Githubdan aldığımız setup ve exe klasörünün içindeki, Kutuphane Uygulama adındaki, Windows installer uzantılı dosyaya tıklanır
+daha sonra kurulum sihirbazı açılır ve kurulum tamamlanmış olur. Masa üstüne simge oluşturulur ve kullanıcı uygulamayı kullanabilir.
