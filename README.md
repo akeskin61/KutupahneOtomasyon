@@ -16,7 +16,7 @@ Bu işlem tamamlandıktan sonra ilgili kitaptan kütüphanede başka stok yoksa 
 Yönetici ise sisteme öğrenci girişi  ve kitap girişi yapmakla görevlidir aynı zamanda zamanında teslim edilmeyen kitapları ve bu kitabı alan öğrencileri listeler ve ilgili işlemleri yapar.
  
  
- ## Proje Kurulumu ##
+ # Proje Kurulumu #
 "akeskin61" isimli github hesabının içinden KutupahneOtomasyon adlı respository'deki, "Veritabanı"  ve "Setup ve Exe" klasörlerinin
 içeriği bilgisayara download edilmelidir, 
 ## Veritabanı Kurulumu ##
